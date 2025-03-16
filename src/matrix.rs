@@ -34,4 +34,26 @@ impl Matrix{
         self.data[index]
     }
 
+    pub fn zeros(rows: usize, cols:usize) -> Self{
+        let data = vec![0.0; rows * cols];
+        Matrix {data, rows, cols}
+    }
+
+    pub fn set(&mut self, row: usize, col:usize, value:f32) {
+        assert!(row < self.rows);
+        assert!(col < self.cols);
+        let  index = self.cols * row + col;
+        self.data[index] = value
+    }
+
+    pub fn random(rows: usize, cols:usize, low:f32, high:f32) -> Self{
+        let mut data = vec![0.0; rows * cols];
+        for i in 0..rows*cols{
+            let rnd = rand::random::<u32>();
+            data[i] = low + (rnd as f32 / u32::MAX as f32) * (high-low);
+            
+        }
+        Matrix {data, rows, cols}
+    }
+
 }
