@@ -1,5 +1,6 @@
 mod matrix;
 mod nn;
+// mod model;
 use crate::nn::Linear;
 
 use crate::matrix::Matrix;
