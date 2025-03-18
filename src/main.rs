@@ -1,7 +1,15 @@
 mod matrix;
+mod nn;
+use crate::nn::Linear;
+
 use crate::matrix::Matrix;
 
 fn main() {
-    let m = Matrix::random(3, 3, -1.0, 1.0);
-    println!("{m}")
+    let x = Matrix::random(3, 5, -1.0, 1.0);
+    let linear = Linear::new(5, 1);
+    let output = linear.forward(&x);
+    println!("x=\n{x}");
+    println!("w=\n{}", linear.weight);
+    println!("b=\n{}", linear.bias);
+    println!("{output}");
 }

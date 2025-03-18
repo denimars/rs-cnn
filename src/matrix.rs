@@ -1,4 +1,4 @@
-use std::fmt::{self, write};
+use std::fmt;
 
 #[derive(Debug, Clone)]
 
@@ -56,4 +56,41 @@ impl Matrix{
         Matrix {data, rows, cols}
     }
 
+}
+
+
+pub fn matmul(a: &Matrix, b:&Matrix)-> Matrix{
+    assert!(a.cols== b.rows);
+    let mut matrix = Matrix::zeros(a.rows, b.cols);
+    for i in 0..a.rows{
+        for j in 0..b.cols{
+            let mut sum = 0.0;
+            for k in 0..b.rows{
+                sum += a.get(i, k) * b.get(k, j)
+            }
+           matrix.set(i, j, sum);
+        }
+    }
+    matrix
+}
+
+#[cfg(test)]
+
+mod test{
+    use super::{matmul, Matrix};
+
+    #[test]
+    fn test_matmul(){
+        let a = Matrix::new(vec![1.0,1.0, 0.0, 2.0], 2, 2);
+        let b = Matrix::new(vec![0.0,1.0, 1.0, 0.0, 0.0, 1.0], 2, 3);
+        let expected = vec![0.0, 1.0, 2.0, 0.0, 0.0, 2.0];
+
+        let c = matmul(&a, &b);
+       
+        print!("{c}");
+        for i in 0..2*3{
+            assert!(c.data[i]== expected[i]); 
+        }
+
+    }
 }
