@@ -83,7 +83,7 @@ mod test{
     fn test_matmul(){
         let a = Matrix::new(vec![1.0,1.0, 0.0, 2.0], 2, 2);
         let b = Matrix::new(vec![0.0,1.0, 1.0, 0.0, 0.0, 1.0], 2, 3);
-        let expected = vec![0.0, 1.0, 2.0, 0.0, 0.0, 2.0];
+        let expected:Vec<f32> = vec![0.0, 1.0, 2.0, 0.0, 0.0, 2.0];
 
         let c = matmul(&a, &b);
        

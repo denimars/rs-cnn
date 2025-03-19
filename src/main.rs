@@ -1,16 +1,26 @@
 mod matrix;
 mod nn;
-// mod model;
-use crate::nn::Linear;
+mod model;
+mod activation;
 
-use crate::matrix::Matrix;
+
+// mod model;
+use nn::Linear;
+
+use matrix::Matrix;
+use model::Model;
 
 fn main() {
-    let x = Matrix::random(3, 5, -1.0, 1.0);
-    let linear = Linear::new(5, 1);
-    let output = linear.forward(&x);
+    let x = Matrix::random(10, 5, -1.0, 1.0);
+    let layers = vec![
+        Linear::new(5, 10),
+        Linear::new(10, 2),
+
+    ];
+    let model = Model::new(layers);
+
+    let output = model.forward(&x);
     println!("x=\n{x}");
-    println!("w=\n{}", linear.weight);
-    println!("b=\n{}", linear.bias);
+
     println!("{output}");
 }
